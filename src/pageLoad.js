@@ -1,8 +1,9 @@
-const pageLoad = () => {
-  const content = document.querySelector('#content');
-  const h1 = document.createElement('h1');
-  h1.innerHTML = 'Restauran page';
-  content.appendChild(h1);
+const pageLoad = (tabPages) => {
+  const tabs = document.querySelector('.tab-content');
+
+  tabPages.forEach((e) => {
+    tabs.appendChild(e);
+  });
 };
 
 export { pageLoad as default };

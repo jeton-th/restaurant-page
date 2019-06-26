@@ -1,9 +1,5 @@
-const pageLoad = (tabPages) => {
-  const tabs = document.querySelector('.tab-content');
-
-  tabPages.forEach((e) => {
-    tabs.appendChild(e);
-  });
+const pageLoad = () => {
+  document.querySelector('#content').innerHTML = '';
 };
 
 export { pageLoad as default };

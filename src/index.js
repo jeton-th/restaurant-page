@@ -3,27 +3,51 @@ import banner from './banner';
 import menu from './menu';
 import contact from './contact';
 
-const content = document.querySelector('#content');
-const main = document.createElement('div');
-const tabContent = document.createElement('div');
-const tabLinks = document.createElement('div');
-const menuLink = document.createElement('input');
-const contactLink = document.createElement('input');
+// const fillBanner = () => {
+//   const content = document.querySelector('#content');
+//   const main = document.createElement('div');
 
-main.classList.add('main');
-tabLinks.classList.add('tab-links');
-tabContent.classList.add('tab-content');
-menuLink.setAttribute('type', 'radio');
-contactLink.setAttribute('type', 'radio');
+//   content.appendChild(banner());
+//   content.appendChild(main);
+// };
 
-content.appendChild(banner());
-content.appendChild(main);
-main.appendChild(tabLinks);
-main.appendChild(tabContent);
-tabLinks.appendChild(menuLink);
-tabLinks.appendChild(contactLink);
+const changeTab = ((activeTab = false) => {
+  pageLoad();
 
-const menuContent = menu();
-const contactContent = contact();
-pageLoad([menuContent, contactContent]);
+  const content = document.querySelector('#content');
+  const main = document.createElement('div');
 
+  content.appendChild(banner());
+  content.appendChild(main);
+
+  const tabLinks = document.createElement('nav');
+  const menuLink = document.createElement('a');
+  const contactLink = document.createElement('a');
+  const tabContent = document.createElement('div');
+
+  main.classList.add('main');
+  tabLinks.classList.add('tab-links');
+  tabContent.classList.add('tab-content');
+  menuLink.setAttribute('href', '#');
+  contactLink.setAttribute('href', '#');
+  menuLink.innerHTML = 'Menu';
+  contactLink.innerHTML = 'Contact';
+
+  main.appendChild(tabLinks);
+  main.appendChild(tabContent);
+  tabLinks.appendChild(menuLink);
+  tabLinks.appendChild(contactLink);
+
+  if (activeTab) {
+    activeTab.classList.add('active');
+  } else {
+    menuLink.classList.add('active');
+  }
+
+  menu();
+  contact();
+
+  [menuLink, contactLink].forEach((tabLink) => {
+    tabLink.addEventListener('click', changeTab(tabLink));
+  });
+})();

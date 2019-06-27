@@ -1,53 +1,47 @@
 import pageLoad from './pageLoad';
-import banner from './banner';
 import menu from './menu';
+import banner from './banner';
 import contact from './contact';
 
-// const fillBanner = () => {
-//   const content = document.querySelector('#content');
-//   const main = document.createElement('div');
-
-//   content.appendChild(banner());
-//   content.appendChild(main);
-// };
-
-const changeTab = ((activeTab = false) => {
-  pageLoad();
-
-  const content = document.querySelector('#content');
-  const main = document.createElement('div');
-
-  content.appendChild(banner());
-  content.appendChild(main);
-
-  const tabLinks = document.createElement('nav');
+const getLinks = () => {
   const menuLink = document.createElement('a');
   const contactLink = document.createElement('a');
-  const tabContent = document.createElement('div');
 
-  main.classList.add('main');
-  tabLinks.classList.add('tab-links');
-  tabContent.classList.add('tab-content');
-  menuLink.setAttribute('href', '#');
-  contactLink.setAttribute('href', '#');
+  menuLink.id = 'menu';
+  contactLink.id = 'contact';
+
   menuLink.innerHTML = 'Menu';
   contactLink.innerHTML = 'Contact';
 
-  main.appendChild(tabLinks);
-  main.appendChild(tabContent);
-  tabLinks.appendChild(menuLink);
-  tabLinks.appendChild(contactLink);
+  return [menuLink, contactLink];
+};
 
-  if (activeTab) {
-    activeTab.classList.add('active');
-  } else {
-    menuLink.classList.add('active');
+const getTabContent = (activeLink = 'menu') => {
+  if (activeLink === 'contact') {
+    return contact();
   }
+  return menu();
+};
 
-  menu();
-  contact();
+const getMain = (activeLink = 'menu') => {
+  const main = document.createElement('div');
+  main.classList.add('main');
 
-  [menuLink, contactLink].forEach((tabLink) => {
-    tabLink.addEventListener('click', changeTab(tabLink));
+  const nav = document.createElement('nav');
+  const links = getLinks(activeLink);
+
+  links.forEach((link) => {
+    nav.appendChild(link);
+    link.classList.remove('active');
+    if (link.id === activeLink) link.classList.add('active');
+    link.addEventListener('click', () => {
+      pageLoad(banner(), getMain(link.id));
+    }, false);
   });
-})();
+
+  main.appendChild(nav);
+  main.appendChild(getTabContent(activeLink));
+  return main;
+};
+
+pageLoad(banner(), getMain());

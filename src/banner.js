@@ -1,16 +1,17 @@
 const banner = () => {
   const bannerDiv = document.createElement('div');
   const h1 = document.createElement('h1');
-  const lorem = document.createElement('p');
+  const a = document.createElement('a');
+  const p = document.createElement('p');
 
   bannerDiv.classList.add('banner');
-  lorem.classList.add('lorem');
-
-  h1.innerHTML = 'Restauran page';
-  lorem.innerHTML = 'Lorem ipsum dolor sit amet ...';
+  a.innerHTML = 'Restaurant Page';
+  a.setAttribute('href', '');
+  p.innerHTML = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore neque recusandae, aut voluptates, temporibus magni, quis natus pariatur sapiente qui odio expedita modi eius corporis quibusdam tenetur alias odit optio?';
 
   bannerDiv.appendChild(h1);
-  bannerDiv.appendChild(lorem);
+  h1.appendChild(a);
+  bannerDiv.appendChild(p);
 
   return bannerDiv;
 };

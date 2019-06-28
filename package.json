@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "development": "webpack --watch",
+    "build":  "webpack"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/jeton-th/restaurant-page/issues"
   },
-  "homepage": "https://github.com/jeton-th/restaurant-page#readme"
+  "homepage": "https://github.com/jeton-th/restaurant-page#readme",
+  "devDependencies": {
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.4"
+  }
 }
